@@ -1,6 +1,7 @@
 # import Pandas (data manipulation) and Matplotlib (trending)
 import pandas as pd
 import matplotlib.pyplot as plt
+import numpy as np
 
 def load_data(result_name):
 	data = {}						# data gained from one result file
@@ -22,7 +23,7 @@ def load_data(result_name):
 
 	# concat all uploaded data to one data set
 	sim_table = pd.concat(combined_data, axis=1)
-	print(sim_table)
+	#print(sim_table)
 
 	sub_data = {}
 	# create separate data sets for different data
@@ -38,6 +39,8 @@ def load_data(result_name):
 	sub_data["reklama_int"] = sim_table.ix[9, 1:]
 	sub_data["reklama_mag"] = sim_table.ix[10, 1:]
 
+	print(sub_data)
+
 	return sub_data
 
 def main():
@@ -47,6 +50,12 @@ def main():
 	# import data from previous simulation
 	old_data = load_data(old_result_name)
 	new_data = load_data(new_result_name)
+
+	aprox_data = old_data.copy()
+
+#	for k in old_data["sprzedaz"].keys():
+#		#print (old_data["sprzedaz"])
+	aprox_data["sprzedaz"] = (old_data["sprzedaz"] + new_data["sprzedaz"])/2
 
 	# example plot
 	#plt.figure('Sztuki towaru')
@@ -63,7 +72,8 @@ def main():
 	plt.figure('Sztuki towaru')
 	plt.plot(old_data["runda"], old_data["sprzedaz"], 'b-')
 	plt.plot(new_data["runda"], new_data["sprzedaz"], 'r-')
-	plt.legend(['Sprzedane old', 'Sprzedane new'])
+	plt.plot(aprox_data["runda"], aprox_data["sprzedaz"], 'g-')
+	plt.legend(['Sprzedane old', 'Sprzedane new', 'Sprzedane aprox'])
 	plt.xlabel('Runda')
 	plt.ylabel('Sztuki towaru')
 
