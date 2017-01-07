@@ -45,38 +45,82 @@ def load_data(result_name):
 
 def main():
 	new_result_name = 'wyniki{}.xls'			# .xls name scheme
-	old_result_name = 'old_games/wyniki{}.xls'
+	old_result_name = 'old_games/1/wyniki{}.xls'
+	test_result_name = 'old_games/zm/wyniki{}.xls'
 
 	# import data from previous simulation
 	old_data = load_data(old_result_name)
+	test_data = load_data(test_result_name)
 	new_data = load_data(new_result_name)
 
+	# TODO: aprox of multiple historical values
 	aprox_data = old_data.copy()
+	aprox_data["sprzedaz"] = (old_data["sprzedaz"] + test_data["sprzedaz"])/2
+	aprox_data["udzial"] = (old_data["udzial"] + test_data["udzial"])/2
+	aprox_data["wynik_firmy"] = (old_data["wynik_firmy"] + test_data["wynik_firmy"])/2
+	aprox_data["gotowka"] = (old_data["gotowka"] + test_data["gotowka"])/2
+	aprox_data["wolumen"] = (old_data["wolumen"] + test_data["wolumen"])/2
+	aprox_data["jakosc"] = (old_data["jakosc"] + test_data["jakosc"])/2
+	aprox_data["cena"] = (old_data["cena"] + test_data["cena"])/2
 
-#	for k in old_data["sprzedaz"].keys():
-#		#print (old_data["sprzedaz"])
-	aprox_data["sprzedaz"] = (old_data["sprzedaz"] + new_data["sprzedaz"])/2
 
-	# example plot
-	#plt.figure('Sztuki towaru')
-	#num_bins = 5
-	# the histogram of the data
-	#n, bins, patches = plt.hist(sprzedaz, num_bins, facecolor='green')
-	#plt.plot(runda, wolumen, 'r-')
-	#plt.legend(['Sprzedane', 'Wyprodukowane'])
-	#plt.xlabel('Runda')
-	#plt.ylabel('Liczba sztuk')
-	#plt.title('Sztuki towaru')
+	plt.figure('Udzial')
+	plt.plot(old_data["runda"], old_data["udzial"], 'b-')
+	plt.plot(new_data["runda"], new_data["udzial"], linewidth=2, linestyle="-", c="red")
+	plt.plot(aprox_data["runda"], aprox_data["udzial"], 'g-')
+	plt.legend(['Udzial best', 'Udzial new', 'Udzial aprox'])
+	plt.xlabel('Runda')
+	plt.ylabel('Udzial')
 
-	# example plot
-	plt.figure('Sztuki towaru')
+	plt.figure('wynik_firmy')
+	plt.plot(old_data["runda"], old_data["wynik_firmy"], 'b-')
+	plt.plot(new_data["runda"], new_data["wynik_firmy"], linewidth=2, linestyle="-", c="red")
+	plt.plot(aprox_data["runda"], aprox_data["wynik_firmy"], 'g-')
+	plt.legend(['wynik_firmy best', 'wynik_firmy new', 'wynik_firmy aprox'])
+	plt.xlabel('Runda')
+	plt.ylabel('wynik_firmy')
+
+	plt.figure('gotowka')
+	plt.plot(old_data["runda"], old_data["gotowka"], 'b-')
+	plt.plot(new_data["runda"], new_data["gotowka"], linewidth=2, linestyle="-", c="red")
+	plt.plot(aprox_data["runda"], aprox_data["gotowka"], 'g-')
+	plt.legend(['gotowka best', 'gotowka new', 'gotowka aprox'])
+	plt.xlabel('Runda')
+	plt.ylabel('gotowka')
+
+	plt.figure('wolumen')
+	plt.plot(old_data["runda"], old_data["wolumen"], 'b-')
+	plt.plot(new_data["runda"], new_data["wolumen"], linewidth=2, linestyle="-", c="red")
+	plt.plot(aprox_data["runda"], aprox_data["wolumen"], 'g-')
+	plt.legend(['wolumen best', 'wolumen new', 'wolumen aprox'])
+	plt.xlabel('Runda')
+	plt.ylabel('wolumen')
+
+	plt.figure('jakosc')
+	plt.plot(old_data["runda"], old_data["jakosc"], 'b-')
+	plt.plot(new_data["runda"], new_data["jakosc"], linewidth=2, linestyle="-", c="red")
+	plt.plot(aprox_data["runda"], aprox_data["jakosc"], 'g-')
+	plt.legend(['jakosc best', 'jakosc new', 'jakosc aprox'])
+	plt.xlabel('Runda')
+	plt.ylabel('jakosc')
+
+	plt.figure('cena')
+	plt.plot(old_data["runda"], old_data["cena"], 'b-')
+	plt.plot(new_data["runda"], new_data["cena"], linewidth=2, linestyle="-", c="red")
+	plt.plot(aprox_data["runda"], aprox_data["cena"], 'g-')
+	plt.legend(['cena best', 'cena new', 'cena aprox'])
+	plt.xlabel('Runda')
+	plt.ylabel('cena')
+
+	# sprzedaz plot
+	plt.figure('Sprzedaz')
 	plt.plot(old_data["runda"], old_data["sprzedaz"], 'b-')
-	plt.plot(new_data["runda"], new_data["sprzedaz"], 'r-')
+	plt.plot(new_data["runda"], new_data["sprzedaz"], linewidth=2, linestyle="-", c="red")
 	plt.plot(aprox_data["runda"], aprox_data["sprzedaz"], 'g-')
-	plt.legend(['Sprzedane old', 'Sprzedane new', 'Sprzedane aprox'])
+	plt.legend(['Sprzedane best', 'Sprzedane new', 'Sprzedane aprox'])
 	plt.xlabel('Runda')
 	plt.ylabel('Sztuki towaru')
-
+	
 	plt.show()
 
 if __name__ == "__main__":
