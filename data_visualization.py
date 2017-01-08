@@ -68,13 +68,15 @@ def main():
 
 	# TODO: aprox of multiple historical values
 	aprox_data = best_old_data.copy()
-	aprox_data["sprzedaz"] = (best_old_data["sprzedaz"] + test_data["sprzedaz"])/2
-	aprox_data["udzial"] = (best_old_data["udzial"] + test_data["udzial"])/2
-	aprox_data["wynik_firmy"] = (best_old_data["wynik_firmy"] + test_data["wynik_firmy"])/2
-	aprox_data["gotowka"] = (best_old_data["gotowka"] + test_data["gotowka"])/2
-	aprox_data["wolumen"] = (best_old_data["wolumen"] + test_data["wolumen"])/2
-	aprox_data["jakosc"] = (best_old_data["jakosc"] + test_data["jakosc"])/2
-	aprox_data["cena"] = (best_old_data["cena"] + test_data["cena"])/2
+	num_of_old_data = 2
+
+	aprox_data["sprzedaz"] = (best_old_data["sprzedaz"] + test_data["sprzedaz"]) / num_of_old_data
+	aprox_data["udzial"] = (best_old_data["udzial"] + test_data["udzial"]) / num_of_old_data
+	aprox_data["wynik_firmy"] = (best_old_data["wynik_firmy"] + test_data["wynik_firmy"]) / num_of_old_data
+	aprox_data["gotowka"] = (best_old_data["gotowka"] + test_data["gotowka"]) / num_of_old_data
+	aprox_data["wolumen"] = (best_old_data["wolumen"] + test_data["wolumen"]) / num_of_old_data
+	aprox_data["jakosc"] = (best_old_data["jakosc"] + test_data["jakosc"]) / num_of_old_data
+	aprox_data["cena"] = (best_old_data["cena"] + test_data["cena"]) / num_of_old_data
 
 	# prepaire figures for all interesting data
 	preparire_figure("udzial", best_old_data, aprox_data, new_data);
@@ -89,7 +91,7 @@ def main():
 	plt.show(block = False)
 
 	# wait for user to close the simulation
-	input("Press any key to close visualization...")
+	input("\nPress any key to close visualization...")
 
 if __name__ == "__main__":
     main()
