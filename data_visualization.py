@@ -1,7 +1,6 @@
 # import Pandas (data manipulation) and Matplotlib (trending)
 import pandas as pd
 import matplotlib.pyplot as plt
-import numpy as np
 
 def load_data(result_name):
 	data = {}						# data gained from one result file
@@ -44,7 +43,7 @@ def load_data(result_name):
 	return sub_data
 
 def main():
-	new_result_name = 'wyniki{}.xls'			# .xls name scheme
+	new_result_name = 'E:/new_data/wyniki{}.xls'			# .xls name scheme
 	old_result_name = 'old_games/1/wyniki{}.xls'
 	test_result_name = 'old_games/zm/wyniki{}.xls'
 
@@ -120,7 +119,7 @@ def main():
 	plt.legend(['Sprzedane best', 'Sprzedane new', 'Sprzedane aprox'])
 	plt.xlabel('Runda')
 	plt.ylabel('Sztuki towaru')
-	
+
 	plt.show()
 
 if __name__ == "__main__":
