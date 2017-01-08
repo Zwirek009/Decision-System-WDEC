@@ -38,14 +38,24 @@ def load_data(result_name):
 	sub_data["reklama_int"] = sim_table.ix[9, 1:]
 	sub_data["reklama_mag"] = sim_table.ix[10, 1:]
 
-	print(sub_data)
+	#print(sub_data)
 
 	return sub_data
 
+def preparire_figure(data_type, old_data, aprox_data, new_data):
+	plt.figure(data_type)
+	plt.plot(old_data["runda"], old_data[data_type], 'b-')
+	plt.plot(aprox_data["runda"], aprox_data[data_type], 'g--')
+	plt.plot(new_data["runda"], new_data[data_type], linewidth=2, linestyle="-", c="red")
+	plt.legend([data_type + ' best', data_type + ' aprox', data_type + ' new'])
+	plt.xlabel('runda')
+	plt.ylabel(data_type)
+	plt.grid()
+
 def main():
 	new_result_name = 'E:/new_data/wyniki{}.xls'			# .xls name scheme
-	old_result_name = 'old_games/1/wyniki{}.xls'
-	test_result_name = 'old_games/zm/wyniki{}.xls'
+	old_result_name = 'old_games/1/wyniki{}.xls'			#
+	test_result_name = 'old_games/zm/wyniki{}.xls'			#
 
 	# import data from previous simulation
 	old_data = load_data(old_result_name)
@@ -62,70 +72,13 @@ def main():
 	aprox_data["jakosc"] = (old_data["jakosc"] + test_data["jakosc"])/2
 	aprox_data["cena"] = (old_data["cena"] + test_data["cena"])/2
 
-	# TODO: change into function
-	plt.figure('Udzial')
-	plt.plot(old_data["runda"], old_data["udzial"], 'b-')
-	plt.plot(aprox_data["runda"], aprox_data["udzial"], 'g-')
-	plt.plot(new_data["runda"], new_data["udzial"], linewidth=2, linestyle="-", c="red")
-	plt.legend(['Udzial best', 'Udzial aprox', 'Udzial new'])
-	plt.xlabel('Runda')
-	plt.ylabel('Udzial')
-	plt.grid()
-
-	plt.figure('wynik_firmy')
-	plt.plot(old_data["runda"], old_data["wynik_firmy"], 'b-')
-	plt.plot(aprox_data["runda"], aprox_data["wynik_firmy"], 'g-')
-	plt.plot(new_data["runda"], new_data["wynik_firmy"], linewidth=2, linestyle="-", c="red")
-	plt.legend(['wynik_firmy best', 'wynik_firmy aprox', 'wynik_firmy new'])
-	plt.xlabel('Runda')
-	plt.ylabel('wynik_firmy')
-	plt.grid()
-
-	plt.figure('gotowka')
-	plt.plot(old_data["runda"], old_data["gotowka"], 'b-')
-	plt.plot(aprox_data["runda"], aprox_data["gotowka"], 'g-')
-	plt.plot(new_data["runda"], new_data["gotowka"], linewidth=2, linestyle="-", c="red")
-	plt.legend(['gotowka best', 'gotowka aprox', 'gotowka new'])
-	plt.xlabel('Runda')
-	plt.ylabel('gotowka')
-	plt.grid()
-
-	plt.figure('wolumen')
-	plt.plot(old_data["runda"], old_data["wolumen"], 'b-')
-	plt.plot(aprox_data["runda"], aprox_data["wolumen"], 'g-')
-	plt.plot(new_data["runda"], new_data["wolumen"], linewidth=2, linestyle="-", c="red")
-	plt.legend(['wolumen best', 'wolumen aprox', 'wolumen new'])
-	plt.xlabel('Runda')
-	plt.ylabel('wolumen')
-	plt.grid()
-
-	plt.figure('jakosc')
-	plt.plot(old_data["runda"], old_data["jakosc"], 'b-')
-	plt.plot(aprox_data["runda"], aprox_data["jakosc"], 'g-')
-	plt.plot(new_data["runda"], new_data["jakosc"], linewidth=2, linestyle="-", c="red")
-	plt.legend(['jakosc best', 'jakosc aprox', 'jakosc new'])
-	plt.xlabel('Runda')
-	plt.ylabel('jakosc')
-	plt.grid()
-
-	plt.figure('cena')
-	plt.plot(old_data["runda"], old_data["cena"], 'b-')
-	plt.plot(aprox_data["runda"], aprox_data["cena"], 'g-')
-	plt.plot(new_data["runda"], new_data["cena"], linewidth=2, linestyle="-", c="red")
-	plt.legend(['cena best', 'cena aprox', 'cena new'])
-	plt.xlabel('Runda')
-	plt.ylabel('cena')
-	plt.grid()
-
-	# sprzedaz plot
-	plt.figure('Sprzedaz')
-	plt.plot(old_data["runda"], old_data["sprzedaz"], 'b-')
-	plt.plot(aprox_data["runda"], aprox_data["sprzedaz"], 'g-')
-	plt.plot(new_data["runda"], new_data["sprzedaz"], linewidth=2, linestyle="-", c="red")
-	plt.legend(['Sprzedane best', 'Sprzedane aprox', 'Sprzedane new'])
-	plt.xlabel('Runda')
-	plt.ylabel('Sztuki towaru')
-	plt.grid()
+	preparire_figure("udzial", old_data, aprox_data, new_data);
+	preparire_figure("wynik_firmy", old_data, aprox_data, new_data);
+	preparire_figure("gotowka", old_data, aprox_data, new_data);
+	preparire_figure("wolumen", old_data, aprox_data, new_data);
+	preparire_figure("jakosc", old_data, aprox_data, new_data);
+	preparire_figure("cena", old_data, aprox_data, new_data);
+	preparire_figure("sprzedaz", old_data, aprox_data, new_data);
 
 	plt.show()
 
