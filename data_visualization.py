@@ -53,34 +53,43 @@ def preparire_figure(data_type, old_data, aprox_data, new_data):
 	plt.grid()
 
 def main():
-	new_result_name = 'E:/new_data/wyniki{}.xls'			# .xls name scheme
-	old_result_name = 'old_games/1/wyniki{}.xls'			#
+	new_result_name = 'E:/new_data/wyniki{}.xls'			# .xls name schemes
+	best_result_name = 'old_games/1/wyniki{}.xls'			#
+
+	# for testing
 	test_result_name = 'old_games/zm/wyniki{}.xls'			#
 
+	# TODO: read multiple old data sets
+
 	# import data from previous simulation
-	old_data = load_data(old_result_name)
+	best_old_data = load_data(best_result_name)
 	test_data = load_data(test_result_name)
 	new_data = load_data(new_result_name)
 
 	# TODO: aprox of multiple historical values
-	aprox_data = old_data.copy()
-	aprox_data["sprzedaz"] = (old_data["sprzedaz"] + test_data["sprzedaz"])/2
-	aprox_data["udzial"] = (old_data["udzial"] + test_data["udzial"])/2
-	aprox_data["wynik_firmy"] = (old_data["wynik_firmy"] + test_data["wynik_firmy"])/2
-	aprox_data["gotowka"] = (old_data["gotowka"] + test_data["gotowka"])/2
-	aprox_data["wolumen"] = (old_data["wolumen"] + test_data["wolumen"])/2
-	aprox_data["jakosc"] = (old_data["jakosc"] + test_data["jakosc"])/2
-	aprox_data["cena"] = (old_data["cena"] + test_data["cena"])/2
+	aprox_data = best_old_data.copy()
+	aprox_data["sprzedaz"] = (best_old_data["sprzedaz"] + test_data["sprzedaz"])/2
+	aprox_data["udzial"] = (best_old_data["udzial"] + test_data["udzial"])/2
+	aprox_data["wynik_firmy"] = (best_old_data["wynik_firmy"] + test_data["wynik_firmy"])/2
+	aprox_data["gotowka"] = (best_old_data["gotowka"] + test_data["gotowka"])/2
+	aprox_data["wolumen"] = (best_old_data["wolumen"] + test_data["wolumen"])/2
+	aprox_data["jakosc"] = (best_old_data["jakosc"] + test_data["jakosc"])/2
+	aprox_data["cena"] = (best_old_data["cena"] + test_data["cena"])/2
 
-	preparire_figure("udzial", old_data, aprox_data, new_data);
-	preparire_figure("wynik_firmy", old_data, aprox_data, new_data);
-	preparire_figure("gotowka", old_data, aprox_data, new_data);
-	preparire_figure("wolumen", old_data, aprox_data, new_data);
-	preparire_figure("jakosc", old_data, aprox_data, new_data);
-	preparire_figure("cena", old_data, aprox_data, new_data);
-	preparire_figure("sprzedaz", old_data, aprox_data, new_data);
+	# prepaire figures for all interesting data
+	preparire_figure("udzial", best_old_data, aprox_data, new_data);
+	preparire_figure("wynik_firmy", best_old_data, aprox_data, new_data);
+	preparire_figure("gotowka", best_old_data, aprox_data, new_data);
+	preparire_figure("wolumen", best_old_data, aprox_data, new_data);
+	preparire_figure("jakosc", best_old_data, aprox_data, new_data);
+	preparire_figure("cena", best_old_data, aprox_data, new_data);
+	preparire_figure("sprzedaz", best_old_data, aprox_data, new_data);
 
-	plt.show()
+	# show each figure in separate window
+	plt.show(block = False)
+
+	# wait for user to close the simulation
+	input("Press any key to close visualization...")
 
 if __name__ == "__main__":
     main()
