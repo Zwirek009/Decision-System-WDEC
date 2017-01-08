@@ -62,7 +62,7 @@ def main():
 	aprox_data["jakosc"] = (old_data["jakosc"] + test_data["jakosc"])/2
 	aprox_data["cena"] = (old_data["cena"] + test_data["cena"])/2
 
-
+	# TODO: Change order of plotting
 	plt.figure('Udzial')
 	plt.plot(old_data["runda"], old_data["udzial"], 'b-')
 	plt.plot(new_data["runda"], new_data["udzial"], linewidth=2, linestyle="-", c="red")
