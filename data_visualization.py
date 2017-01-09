@@ -48,7 +48,7 @@ def preparire_figure_minimal(data_type, old_data, aprox_data, new_data):
 	plt.plot(old_data["runda"], old_data[data_type], 'b-')
 	plt.plot(aprox_data["runda"], aprox_data[data_type], 'g--')
 	plt.plot(new_data["runda"], new_data[data_type], linewidth=2, linestyle="-", c="red")
-	plt.legend([data_type + ' best', data_type + ' aprox', data_type + ' new'])
+	plt.legend([data_type + ' best', data_type + ' aprox', data_type + ' new'], loc='upper left')
 	plt.xlabel('runda')
 	plt.ylabel(data_type)
 	plt.grid()
@@ -115,7 +115,7 @@ def main():
 	gs = gridspec.GridSpec(3, 3)
 	ax1 = fig.add_subplot(gs[:, 0])
 	preparire_figure_maximal("reklama_tv", best_old_data, old_2_data, old_3_data, old_4_data, aprox_data, new_data)
-	plt.legend(['fourth', 'third', 'second', 'best', 'aprox', 'new'])	# show legend to one of plots in the figure
+	plt.legend(['fourth', 'third', 'second', 'best', 'aprox', 'new'], loc='upper left')	# show legend to one of plots in the figure
 	ax1 = fig.add_subplot(gs[:, 1])
 	preparire_figure_maximal("reklama_int", best_old_data, old_2_data, old_3_data, old_4_data, aprox_data, new_data)
 	ax1 = fig.add_subplot(gs[:, 2])
@@ -128,7 +128,7 @@ def main():
 	gs = gridspec.GridSpec(2, 4)
 	ax1 = fig.add_subplot(gs[0, :-2])
 	preparire_figure_maximal("wynik_firmy", best_old_data, old_2_data, old_3_data, old_4_data, aprox_data, new_data)
-	plt.legend(['fourth', 'third', 'second', 'best', 'aprox', 'new'])	# show legend to one of plots in the figure
+	plt.legend(['fourth', 'third', 'second', 'best', 'aprox', 'new'], loc='upper left')	# show legend to one of plots in the figure
 	ax1 = fig.add_subplot(gs[0, 2])
 	preparire_figure_maximal("udzial", best_old_data, old_2_data, old_3_data, old_4_data, aprox_data, new_data)
 	ax1 = fig.add_subplot(gs[0, 3])

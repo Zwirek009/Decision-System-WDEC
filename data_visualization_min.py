@@ -48,18 +48,7 @@ def preparire_figure_minimal(data_type, old_data, aprox_data, new_data):
 	plt.plot(old_data["runda"], old_data[data_type], 'b-')
 	plt.plot(aprox_data["runda"], aprox_data[data_type], 'g--')
 	plt.plot(new_data["runda"], new_data[data_type], linewidth=2, linestyle="-", c="red")
-	plt.legend([data_type + ' best', data_type + ' aprox', data_type + ' new'])
-	plt.xlabel('runda')
-	plt.ylabel(data_type)
-	plt.grid()
-
-def preparire_figure_maximal(data_type, best_old_data, old_2_data, old_3_data, old_4_data, aprox_data, new_data):
-	plt.plot(old_4_data["runda"], old_4_data[data_type], 'k-')
-	plt.plot(old_3_data["runda"], old_3_data[data_type], 'm-')
-	plt.plot(old_2_data["runda"], old_2_data[data_type], 'y-')
-	plt.plot(best_old_data["runda"], best_old_data[data_type], linewidth=2, linestyle="-", c="blue")
-	plt.plot(aprox_data["runda"], aprox_data[data_type], 'g--')
-	plt.plot(new_data["runda"], new_data[data_type], linewidth=3, linestyle="-", c="red")
+	plt.legend([data_type + ' best', data_type + ' aprox', data_type + ' new'], loc='upper left')
 	plt.xlabel('runda')
 	plt.ylabel(data_type)
 	plt.grid()
@@ -108,44 +97,6 @@ def main():
 	preparire_figure_minimal("reklama_int", best_old_data, aprox_data, new_data)
 	preparire_figure_minimal("reklama_mag", best_old_data, aprox_data, new_data)
 	# end MINIMAL
-
-	# prepaire figures for all interesting data (MAXIMAL (default))
-#	fig = plt.figure('Reklama')	# second figure
-#	fig.suptitle('Reklama', fontsize=20)
-#	gs = gridspec.GridSpec(3, 3)
-#	ax1 = fig.add_subplot(gs[:, 0])
-#	preparire_figure_maximal("reklama_tv", best_old_data, old_2_data, old_3_data, old_4_data, aprox_data, new_data)
-#	plt.legend(['fourth', 'third', 'second', 'best', 'aprox', 'new'])	# show legend to one of plots in the figure
-#	ax1 = fig.add_subplot(gs[:, 1])
-#	preparire_figure_maximal("reklama_int", best_old_data, old_2_data, old_3_data, old_4_data, aprox_data, new_data)
-#	ax1 = fig.add_subplot(gs[:, 2])
-#	preparire_figure_maximal("reklama_mag", best_old_data, old_2_data, old_3_data, old_4_data, aprox_data, new_data)
-#	mng = plt.get_current_fig_manager()
-#	mng.full_screen_toggle()
-#
-#	fig = plt.figure('Wyniki')	# first figure
-#	fig.suptitle('Wyniki', fontsize=20)
-#	gs = gridspec.GridSpec(2, 4)
-#	ax1 = fig.add_subplot(gs[0, :-2])
-#	preparire_figure_maximal("wynik_firmy", best_old_data, old_2_data, old_3_data, old_4_data, aprox_data, new_data)
-#	plt.legend(['fourth', 'third', 'second', 'best', 'aprox', 'new'])	# show legend to one of plots in the figure
-#	ax1 = fig.add_subplot(gs[0, 2])
-#	preparire_figure_maximal("udzial", best_old_data, old_2_data, old_3_data, old_4_data, aprox_data, new_data)
-#	ax1 = fig.add_subplot(gs[0, 3])
-#	ax1.yaxis.tick_right()
-#	preparire_figure_maximal("gotowka", best_old_data, old_2_data, old_3_data, old_4_data, aprox_data, new_data)
-#	ax1 = fig.add_subplot(gs[1, 0])
-#	preparire_figure_maximal("wolumen", best_old_data, old_2_data, old_3_data, old_4_data, aprox_data, new_data)
-#	ax1 = fig.add_subplot(gs[1, 1])
-#	preparire_figure_maximal("jakosc", best_old_data, old_2_data, old_3_data, old_4_data, aprox_data, new_data)
-#	ax1 = fig.add_subplot(gs[1, 2])
-#	preparire_figure_maximal("cena", best_old_data, old_2_data, old_3_data, old_4_data, aprox_data, new_data)
-#	ax1 = fig.add_subplot(gs[1, 3])
-#	ax1.yaxis.tick_right()
-#	preparire_figure_maximal("sprzedaz", best_old_data, old_2_data, old_3_data, old_4_data, aprox_data, new_data)
-#	mng = plt.get_current_fig_manager()
-#	mng.full_screen_toggle()
-	# end MAXIMAL
 
 	# show each figure in separate window
 	plt.show(block = False)
