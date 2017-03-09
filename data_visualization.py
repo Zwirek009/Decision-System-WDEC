@@ -1,3 +1,6 @@
+# Project: Data Visualization WDEC
+# File: data_visualization.py
+
 # import Pandas (data manipulation) and Matplotlib (trending)
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -12,7 +15,7 @@ def load_data(result_name):
 	data = pd.read_excel(temp_result_name, header=None)	# load the file
 	combined_data.append(data)							# insert the data to list
 
-	for num in range(2, 6):								# uploading other .xls files
+	for num in range(2, 9):								# uploading other .xls files
 		temp_result_name = result_name.format(num)
 		try:
 			data = pd.read_excel(temp_result_name, header=None)
