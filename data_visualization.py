@@ -1,11 +1,13 @@
-# Project: Data Visualization WDEC
-# File: data_visualization.py
+# Project: Decision Support WDEC - visually-based decision support system for enhancing company income in locally played with other teams market simulation 
+# File: data_visualization.py - main Python file 
+# Author: Maciej Wiraszka
 
 # import Pandas (data manipulation) and Matplotlib (trending)
 import pandas as pd
 import matplotlib.pyplot as plt
 from matplotlib import gridspec
 
+# load set of data from multiple .xls files on specified localization and format (argument result_name)
 def load_data(result_name):
 	data = {}						# data gained from one result file
 	combined_data = []				# list of sigle result file data	
@@ -29,6 +31,7 @@ def load_data(result_name):
 	#print(sim_table)
 
 	sub_data = {}
+
 	# create separate data sets for different data
 	sub_data["runda"] = sim_table.ix[0, 1:]
 	sub_data["sprzedaz"] = sim_table.ix[1, 1:]
@@ -42,10 +45,10 @@ def load_data(result_name):
 	sub_data["reklama_int"] = sim_table.ix[9, 1:]
 	sub_data["reklama_mag"] = sim_table.ix[10, 1:]
 
-	#print(sub_data)
 
 	return sub_data
 
+# prepaire single figure visualization (MINIMAL version)
 def preparire_figure_minimal(data_type, old_data, aprox_data, new_data):
 	plt.figure(data_type + 'MINIMAL')
 	plt.plot(old_data["runda"], old_data[data_type], 'b-')
@@ -56,6 +59,7 @@ def preparire_figure_minimal(data_type, old_data, aprox_data, new_data):
 	plt.ylabel(data_type)
 	plt.grid()
 
+# prepaire single figure visualization (MAXIMAL (default) version)
 def preparire_figure_maximal(data_type, best_old_data, old_2_data, old_3_data, old_4_data, aprox_data, new_data):
 	plt.plot(old_4_data["runda"], old_4_data[data_type], 'k-')
 	plt.plot(old_3_data["runda"], old_3_data[data_type], 'm-')
@@ -67,14 +71,15 @@ def preparire_figure_maximal(data_type, best_old_data, old_2_data, old_3_data, o
 	plt.ylabel(data_type)
 	plt.grid()
 
+
 def main():
-	new_result_name = 'E:/new_data/wyniki{}.xls'			# .xls name schemes
-	best_result_name = 'old_games/1/wyniki{}.xls'			#
+	new_result_name = 'E:/new_data/wyniki{}.xls'			# .xls name schemes, .xls data from actual game (new_result_name) stored on external flash 												
+	best_result_name = 'old_games/1/wyniki{}.xls'			# (due to simulation working on another computer) 
 
 	# other good data sets
-	old_2_result_name = 'old_games/2/wyniki{}.xls'
-	old_3_result_name = 'old_games/3/wyniki{}.xls'
-	old_4_result_name = 'old_games/4/wyniki{}.xls'
+	old_2_result_name = 'old_games/2/wyniki{}.xls'			# historical good game sets .xls name schemas
+	old_3_result_name = 'old_games/3/wyniki{}.xls'			#
+	old_4_result_name = 'old_games/4/wyniki{}.xls'			#
 
 	# import data from simulations
 	best_old_data = load_data(best_result_name)
@@ -84,10 +89,10 @@ def main():
 	old_3_data = load_data(old_3_result_name)
 	old_4_data = load_data(old_4_result_name)
 
-	# TODO: aprox of multiple historical values
 	aprox_data = best_old_data.copy()
 	num_of_old_data = 4
 
+	# create separate plots approximations
 	aprox_data["sprzedaz"] = (best_old_data["sprzedaz"] + old_2_data["sprzedaz"] + old_3_data["sprzedaz"] + old_4_data["sprzedaz"]) / num_of_old_data
 	aprox_data["udzial"] = (best_old_data["udzial"] + old_2_data["udzial"] + old_3_data["udzial"] + old_4_data["udzial"]) / num_of_old_data
 	aprox_data["wynik_firmy"] = (best_old_data["wynik_firmy"] + old_2_data["wynik_firmy"] + old_3_data["wynik_firmy"] + old_4_data["wynik_firmy"]) / num_of_old_data
